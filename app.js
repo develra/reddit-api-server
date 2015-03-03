@@ -2,6 +2,7 @@ var express = require('express')
 var app = express()
 var qs = require('qs');
 reddit = require('redwrap');
+unirest = require('unirest');
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -30,6 +31,20 @@ app.get('/list/:list', function(req, res) {
     reddit.list(req.params.list, function(err, data) {
         res.send(data);
     });
+});
+
+app.get('/sentiment/:text', function(req, res) {
+
+     
+    unirest.post("https://community-sentiment.p.mashape.com/text/")
+    .header("X-Mashape-Key", "E6WL92qMwrmshxL8kvYhvpsLCqQrp1vND7GjsnSnNoYtktrdJL")
+    .header("Content-Type", "application/x-www-form-urlencoded")
+    .header("Accept", "application/json")
+    .send({"txt": req.params.text})
+    .end(function (result) {
+      console.log(result.status, result.headers, result.body);
+      res.send(result)
+});
 });
 
 app.set('port', (process.env.PORT || 3000))
