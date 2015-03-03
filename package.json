@@ -1,0 +1,18 @@
+{
+  "name": "yelp-api-router",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.11.2",
+    "qs": "^2.3.2",
+    "redwrap": "0.0.4",
+    "request": "^2.53.0",
+    "yelp": "^0.1.1"
+  }
+}
