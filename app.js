@@ -1,9 +1,11 @@
+//Includes
 var express = require('express')
 var app = express()
 var qs = require('qs');
 reddit = require('redwrap');
 unirest = require('unirest');
 
+//Reddit/Sentiment Hackathon
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -46,7 +48,19 @@ app.get('/sentiment/:text', function(req, res) {
       res.send(result)
 });
 });
+//Stocks Individual Assignment
+app.get('/symbol/:text', function(req, res) {
+    unirest.get("http://dev.markitondemand.com/Api/v2/Lookup/json?input=" + 
+     req.params.text)
+    .end(function (result) {
+        console.log(result.body);
+        res.send(result.body)
+    });
+});
 
+
+
+// Port Binding
 app.set('port', (process.env.PORT || 3000))
 
 var server = app.listen(process.env.PORT || app.get('port'), function() {
