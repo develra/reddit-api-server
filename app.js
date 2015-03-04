@@ -58,6 +58,13 @@ app.get('/symbol/:text', function(req, res) {
 });
 
 
+app.get('/quote/:symbol', function(req, res) {
+    unirest.get("http://dev.markitondemand.com/Api/v2/Quote/json?symbol=" + 
+     req.params.symbol)
+    .end(function (result) {
+        res.send(result.body);
+    });
+});
 
 // Port Binding
 app.set('port', (process.env.PORT || 3000))
