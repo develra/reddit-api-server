@@ -53,8 +53,7 @@ app.get('/symbol/:text', function(req, res) {
     unirest.get("http://dev.markitondemand.com/Api/v2/Lookup/json?input=" + 
      req.params.text)
     .end(function (result) {
-        console.log(result.body);
-        res.send(result.body)
+        res.send(JSON.parse(result.body));
     });
 });
 
